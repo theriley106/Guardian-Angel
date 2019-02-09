@@ -7,6 +7,7 @@ if is_prod == None:
 		from keys import *
 	except:
 		API_KEY = input("Key: ")
+		FIREBASE_KEY = input("Firebase Key: ")
 else:
 	API_KEY = os.environ.get('GOOGLE_KEY', None)
 
@@ -15,6 +16,10 @@ app = Flask(__name__, static_url_path='/static')
 @app.route('/', methods=['GET'])
 def index():
 	return render_template("index.html", API_KEY=API_KEY)
+
+@app.route('/firebase', methods=['GET'])
+def index_firebase():
+	return render_template("gcp.html", FIREBASE_KEY=FIREBASE_KEY)
 
 @app.route('/longLat', methods=['GET'])
 def get_long_lat():
