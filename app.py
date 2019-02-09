@@ -4,18 +4,17 @@ is_prod = os.environ.get('IS_HEROKU', None)
 longitudeHistory = [None]
 latitudeHistory = [None]
 if is_prod == None:
-	try:
-		from keys import *
-	except:
-		API_KEY = input("Key: ")
+	from keys import *
 else:
 	API_KEY = os.environ.get('GOOGLE_KEY', None)
+	AGORA_KEY = os.environ.get('AGORA_KEY', None)
+	FIREBASE_KEY = os.environ.get('FIREBASE_KEY', None)
 
 app = Flask(__name__, static_url_path='/static')
 
 @app.route('/', methods=['GET'])
 def index():
-	return render_template("index.html", API_KEY=API_KEY)
+	return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
 
 @app.route('/longLat', methods=['GET'])
 def get_long_lat():
@@ -31,7 +30,11 @@ def get_guardian():
 	#print("Long: {} | Lat: {}".format(longitude, latitude))
 	longitude = longitudeHistory
 	latitude = latitudeHistory
-	return render_template("guardian.html", LATITUDE=latitude, LONGITUDE=longitude)
+	return render_template("guardian.html", LATITUDE=latitude, LONGITUDE=longitude, AGORA_KEY=AGORA_KEY)
+
+@app.route('/audio', methods=['GET'])
+def get_audio():
+	return render_template("audio.html", AGORA_KEY=AGORA_KEY)
 
 
 if __name__ == '__main__':

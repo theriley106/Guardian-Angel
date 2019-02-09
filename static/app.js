@@ -33,7 +33,11 @@ function gotPosition(position) {
     ;
 
   pos = ll(at.latitude, at.longitude);
+  console.log("START POSITION");
+  if (you) you.setPosition(pos); else {
     t_0 = Math.round(+new Date / 1000);
+    console.log(pos);
+    console.log(url);
     you = new google.maps.Marker({ map: map
                                  , position: pos
                                  , icon: marker(url, s(20, 17), p(10, 8))
@@ -42,6 +46,7 @@ function gotPosition(position) {
       location = 'mailto:?subject=GPS%20Track&body='
                + encodeURIComponent(log + ' ]\n}\n');
     });
+  }
   if (!zoom) map.setCenter(pos);
 
   // zoom in, as precision improves (or out again)
