@@ -5,7 +5,7 @@ app = Flask(__name__, static_url_path='/static')
 try:
 	from keys import *
 except:
-	API_KEY = raw_input("Key: ")
+	API_KEY = input("Key: ")
 
 @app.route('/', methods=['GET'])
 def index():
