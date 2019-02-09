@@ -1,0 +1,308 @@
+<html><head>
+    <title>Turo Analytics by Christopher Lambert</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <!-- Bootstrap Imports -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Chart.js Libraries -->
+    <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+    <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Lato">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+
+
+</head>
+<body>
+
+
+
+
+  <title></title>
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <link href="http://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" type="text/css">
+  <link href="https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <style>
+	body {
+	  padding: 0;
+	  margin: 0;
+	  font-family: 'Noto Sans', sans-serif;
+	}
+
+	html,body,#map {
+	  height: 100%;
+	}
+
+	.leaflet-top-pane {
+	  pointer-events: none;
+	}
+
+	#footer {
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  background: #777;
+	  z-index: 999;
+	  overflow: auto;
+	  padding: 5px;
+	  opacity: 0.95;
+	  color: #fff;
+	}
+
+	.info {
+	  padding: 6px 8px;
+	  font: 14px/16px Arial, Helvetica, sans-serif;
+	  background: #FFF;
+	  background: rgba(255,255,255,0.8);
+	  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	  border-radius: 5px;
+	}
+
+	.info h4 {
+	  margin: 0 0 5px;
+	  color: #777;
+	}
+
+	.legend {
+	  text-align: left;
+	  line-height: 18px;
+	  color: #fff;
+	  background-color:rgba(119,119,119,0.7);
+	}
+
+	.legend i {
+	  width: 18px;
+	  height: 18px;
+	  float: left;
+	  margin-right: 8px;
+	  opacity:0.9;
+	}
+	#search {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+
+    -webkit-transform: translate(0px, -100%) scale(0, 0);
+    -moz-transform: translate(0px, -100%) scale(0, 0);
+    -o-transform: translate(0px, -100%) scale(0, 0);
+    -ms-transform: translate(0px, -100%) scale(0, 0);
+    transform: translate(0px, -100%) scale(0, 0);
+
+    opacity: 0;
+}
+
+#search.open {
+    -webkit-transform: translate(0px, 0px) scale(1, 1);
+    -moz-transform: translate(0px, 0px) scale(1, 1);
+    -o-transform: translate(0px, 0px) scale(1, 1);
+    -ms-transform: translate(0px, 0px) scale(1, 1);
+    transform: translate(0px, 0px) scale(1, 1);
+    opacity: 1;
+}
+
+#search input[type="search"] {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0);
+    font-size: 60px;
+    font-weight: 300;
+    text-align: center;
+    border: 0px;
+    margin: 0px auto;
+    margin-top: -51px;
+    padding-left: 30px;
+    padding-right: 30px;
+    outline: none;
+}
+#search .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 61px;
+    margin-left: -45px;
+}
+#search .close {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    opacity: 1;
+    padding: 10px 17px;
+    font-size: 27px;
+}
+  </style>
+  <script>
+  $(function () {
+    $('a[href="#search"]').on('click', function(event) {
+        event.preventDefault();
+        $('#search').addClass('open');
+        $('#search > form > input[type="search"]').focus();
+    });
+
+    $('#search, #search button.close').on('click keyup', function(event) {
+        if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+            $(this).removeClass('open');
+        }
+    });
+
+
+    //Do not include! This prevents the form from submitting for DEMO purposes only!
+
+});
+function modelSearch() {
+    sParameter = document.getElementById("searchval").value;
+    url = "/searchByModel/" + encodeURIComponent(sParameter.trim());
+    console.log(window.location.origin + url);
+    window.location = url;
+}
+
+function makeSearch() {
+    sParameter = document.getElementById("searchval").value;
+    url = "/searchByMake/" + encodeURIComponent(sParameter.trim());
+    console.log(window.location.origin + url);
+    window.location = url;
+}
+
+function keywordSearch() {
+    sParameter = document.getElementById("searchval").value;
+    url = "/searchByVehicleID/" + encodeURIComponent(sParameter.trim());
+    console.log(window.location.origin + url);
+    window.location = url;
+}
+
+function userSearch() {
+    sParameter = document.getElementById("searchval").value;
+    url = "/searchByOwnerID/" + encodeURIComponent(sParameter.trim());
+    console.log(window.location.origin + url);
+    window.location = url;
+}
+
+</script>
+
+
+
+  <div class="dark leaflet-container leaflet-retina leaflet-fade-anim" id="map" style="position: relative;" tabindex="0"><div class="leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-tile-pane"><div class="leaflet-layer"><div class="leaflet-tile-container"></div><div class="leaflet-tile-container leaflet-zoom-animated"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(414px, 88px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/7/11@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(414px, 344px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/7/12@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(158px, 88px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/6/11@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(670px, 88px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/8/11@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(158px, 344px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/6/12@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(670px, 344px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/8/12@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(414px, -168px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/7/10@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(414px, 600px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/7/13@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(158px, -168px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/6/10@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(670px, -168px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/8/10@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(158px, 600px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/6/13@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(670px, 600px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/8/13@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-98px, 88px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/5/11@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(926px, 88px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/9/11@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-98px, 344px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/5/12@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(926px, 344px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/9/12@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-98px, -168px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/5/10@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(926px, -168px, 0px);" src="http://b.tiles.mapbox.com/v4/mapbox.dark/5/9/10@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(-98px, 600px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/5/13@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"><img class="leaflet-tile leaflet-tile-loaded" style="height: 256px; width: 256px; transform: translate3d(926px, 600px, 0px);" src="http://a.tiles.mapbox.com/v4/mapbox.dark/5/9/13@2x.png?access_token=pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg"></div></div></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"></div><div class="leaflet-overlay-pane"></div><div class="leaflet-marker-pane"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="#" title="Zoom out">-</a></div></div><div class="leaflet-top leaflet-right"><div class="leaflet-control-grid map-tooltip leaflet-control" style="display: none;"><a class="close" href="#" title="close">close</a><div class="map-tooltip-content"></div></div></div><div class="leaflet-bottom leaflet-left"><div class="mapbox-logo leaflet-control mapbox-logo-true"></div></div><div class="leaflet-bottom leaflet-right"><div class="map-legends wax-legends leaflet-control" style="display: none;"></div><div class="leaflet-control-attribution leaflet-control"><a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="https://openstreetmap.org/about/" target="_blank">© OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#mapbox.dark/-95.713/40.090/5" target="_blank">Improve this map</a></div></div></div></div>
+
+  <div id="footer">
+  <div id="search">
+    <button type="button" class="close">×</button>
+        <input id="searchval" type="search" value="" placeholder="type keyword(s) here">
+            <button style="padding: 14px 18px;
+    font-size: 20px;" id="submissionval" onclick="alert('this works properly')" class="btn btn-primary">Search</button>
+</div>
+  <center>
+    <div class="container" style="padding-left:20px;width:100%;">
+
+
+
+
+<a target="_blank" href="/random" class="btn btn-success">View Random Vehicle</a>
+
+<a href="#search" onclick="document.getElementById('searchval').value = '';document.getElementById('searchval').placeholder='Search by Manufacturer';document.getElementById('submissionval').setAttribute('onclick', 'return makeSearch()');document.getElementById('searchval').focus();document.getElementById('searchval').select();" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Search By Manufacturer</a>
+
+<a href="#search" onclick="document.getElementById('searchval').value = '';document.getElementById('searchval').placeholder='Search by Model';document.getElementById('submissionval').setAttribute('onclick', 'return modelSearch()');document.getElementById('searchval').focus();document.getElementById('searchval').select();" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Search By Model</a>
+
+
+<a href="#search" onclick="document.getElementById('searchval').value = '';document.getElementById('searchval').placeholder='Search by Vehicle ID';document.getElementById('submissionval').setAttribute('onclick', 'return keywordSearch()');document.getElementById('searchval').focus();document.getElementById('searchval').select();" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Search By Vehicle ID</a>
+
+
+<a href="#search" onclick="document.getElementById('searchval').value = '';document.getElementById('searchval').placeholder='Search by Owner ID';document.getElementById('submissionval').setAttribute('onclick', 'return userSearch()');document.getElementById('searchval').focus();document.getElementById('searchval').select();" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Search By Owner ID</a>
+
+<a target="_blank" href="https://github.com/theriley106/turo_analytics" class="btn btn-success">View this Project on Github</a>
+
+
+    </div>
+    </center>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+  <script>
+        L.mapbox.accessToken = 'pk.eyJ1IjoidGhlcmlsZXkxMDYiLCJhIjoiY2o4cm1xZzdnMTgzMDMzbnR1d3Q2Y2p6byJ9.C-Kuwbt67fBaEg0V5rGXzg';
+var map = L.mapbox.map('map', 'mapbox.dark').setView([40.0902, -95.7129], 5);
+
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
+var geoJson = [
+
+
+
+];
+
+// Add custom popups to each using our custom feature properties
+myLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+
+    // Create custom popup content
+    var popupContent =  '<center><a target="_blank" class="popup" href="../vehicle/' + feature.properties.vehicle_id + '">' + feature.properties.vehicle_name + " " + feature.properties.vehicle_model +
+                        '</a></center>';
+    /*var popupContent =  '<a target="_blank" class="popup" href="' + "" + '">' +
+                            '<img src="' + feature.properties.image + '" />' +
+                            feature.properties.year + " " + feature.properties.make + " " + feature.properties.model +
+                        '</a>'; */
+
+    // http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+        closeButton: false,
+        minWidth: 320
+    });
+});
+
+// Add features to the map
+myLayer.setGeoJSON(geoJson);
+  // Get the input field
+var input = document.getElementById("searchval");
+
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  // Cancel the default action, if needed
+  event.preventDefault();
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Trigger the button element with a click
+    document.getElementById("submissionval").click();
+  }
+});
+  </script>
+
+
+<div class="col12 pad4 contain fill-navy dark clip">
+  <div class="center quiet"></div></div>
+  <div class="col4 pad2 fill-darken1 pin-left offcanvas-left">
+    Left panel with content
+  </div>
+
+
+
+</body></html>
