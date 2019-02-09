@@ -17,3 +17,5 @@ html, body {
     height: 650px;
   }
 }
+a:visited{color: white }
+a:hover{color: white}
