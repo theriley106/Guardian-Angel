@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="mobile-web-app-capable" content="yes">
 
 <head>
 
@@ -24,12 +25,14 @@
 <body>
 
 <div class="jumbotron text-center">
-  <h1>Guardian Angel</h1>
+  <h3>Guardian Angel</h3>
 </div>
 
 <div class="container">
   <div class="row">
-
+    <div class="col-sm-4">
+      {% include 'safeWord.html' %}
+    </div>
     <div class="col-sm-4">
       {% include 'mapDiv.html' %}
     </div>
