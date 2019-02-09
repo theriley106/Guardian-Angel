@@ -14,8 +14,8 @@ app = Flask(__name__, static_url_path='/static')
 
 @app.route('/', methods=['GET'])
 def index():
-	return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
-
+	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
+	return render_template('index.html', API_KEY = API_KEY)
 @app.route('/longLat', methods=['GET'])
 def get_long_lat():
 	longitude = request.args.get('long')
