@@ -32,6 +32,11 @@ def get_guardian():
 	latitude = latitudeHistory
 	return render_template("guardian.html", LATITUDE=latitude, LONGITUDE=longitude, AGORA_KEY=AGORA_KEY)
 
+@app.route('/mySite', methods=['GET'])
+def my_site():
+	#print("Long: {} | Lat: {}".format(longitude, latitude))
+	return render_template("mySite.html")
+
 @app.route('/audio', methods=['GET'])
 def get_audio():
 	return render_template("audio.html", AGORA_KEY=AGORA_KEY)
