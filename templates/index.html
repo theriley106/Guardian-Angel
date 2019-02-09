@@ -1,55 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>HTML5 GPS</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
-<style>
-#my_button{
-          position:absolute;
-          bottom:2%;
-          color: #fff;
-          background-color: #4d90fe;
-          padding: 11px;
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Gurdain Angel</title>
+  </head>
+  <body>
+    <div id="my-login-button-target" />
+    <script>
+       window.snapKitInit = function () {
+        var loginButtonIconId = 'my-login-button-target';
+        // Mount Login Button
+        snap.loginkit.mountButton(loginButtonIconId, {
+          clientId: '579c49e5-c75d-4c46-8bde-17e92307b837',
+          redirectURI: 'https://www.google.com',
+          scopeList: [
+            'user.display_name',
+            'user.bitmoji.avatar',
+          ],
+          handleResponseCallback: function() {
+            snap.loginkit.fetchUserInfo()
+              .then(data => console.log('User info:', data));
+          },
+        });
+      };
 
-          border: 1px solid transparent;
-          border-radius: 2px;
-          box-sizing: border-box;
-          -moz-box-sizing: border-box;
-
-          outline: none;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-          alignment-baseline:central;
-          width:90%;
-          left:5%;
-          text-align:center;
-          text-decoration:none;
-
-
-          margin:0px auto;}
-
-
-         #my_button:hover{
-             background-color:#3B6EC2;}
-         a:visited{
-           color: white;}
-         }
-             </style>
-</head>
-<body>
-<div id="map"></div>
-<div id="my_button" style="border: 1px solid black; position: absolute; background-color: white; text-align: center; width: 5em; cursor: pointer; right: 15px;" title="Show street map">
-  <div id="my_button" style="border-style: solid; border-color: rgb(52, 86, 132) rgb(108, 157, 223) rgb(108, 157, 223) rgb(52, 86, 132); border-width: 1px; font-size: 12px; font-weight: bold;">
-      Map
-  </div>
-</div>
-<div id="my_button">
-  <a href="tel:+1-864-567-4106">Call Guardian</a>
-</div>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}"></script>
-<script src="{{ url_for('static',filename='app.js') }}"></script>
-</body>
+      // Load the SDK asynchronously
+      (function (d, s, id) {
+        var js, sjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://sdk.snapkit.com/js/v1/login.js";
+        sjs.parentNode.insertBefore(js, sjs);
+      }(document, 'script', 'loginkit-sdk'));
+    </script>
+  </body>
 </html>
