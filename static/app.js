@@ -73,6 +73,16 @@ function marker(url, size, hotspot, origin) {
   return new google.maps.MarkerImage(url, size, origin || p(0, 0), hotspot);
 }
 
+function httpGet(theUrl)
+// The network request grabs the json containing mp3 structure
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+
 function save(at) {
   var lat = at.latitude.toFixed(6) // decimeter precision should be quite enough
     , lng = at.longitude.toFixed(6)
@@ -81,4 +91,6 @@ function save(at) {
   time = Math.round(new Date / 1000) - t_0;
   log += (log ? ' ,' : '{"time":'+ t_0 +'\n,"head":\n '+ head +'\n,"data":\n [')
        + '[' + lat +','+ lng +','+ pre +','+ time +']\n';
+  console.log(log);
+  httpGet("/longLat?long=" + lng + "&lat=" + lat);
 }
