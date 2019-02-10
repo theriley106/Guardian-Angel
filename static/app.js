@@ -14,7 +14,7 @@ google.maps.event.addDomListener(window, 'load', init);
 
 function init() {
   map = new google.maps.Map( document.getElementById('map')
-                           , { zoom: zoom
+                           , { zoom: zoom, disableDefaultUI: true, gestureHandling: "greedy"
                              , mapTypeId: google.maps.MapTypeId.ROADMAP
                              });
 
