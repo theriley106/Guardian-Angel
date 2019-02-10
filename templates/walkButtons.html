@@ -16,7 +16,7 @@
  </center>
 </div>
 <div class="btn-group text-center panel-body">
-    <button type="button" style="margin: 5px;border-radius: 10px;height:80px" class="btn btn-block btn-success obuttons" data-toggle="modal" data-target="#exampleModal">Start Walk</button>
+    <button type="button" style="margin: 5px;border-radius: 10px;height:80px" class="btn btn-block btn-success obuttons" data-toggle="modal" onclick="start();" data-target="#exampleModal">Start Walk</button>
 </div>
 
 </div>
@@ -25,11 +25,15 @@
 // Set the date we're counting down to
 window.timeVal = 0
 // Update the count down every 1 second
-var x = setInterval(function() {
+
+function start(){
+	var x = setInterval(function() {
 
   window.timeVal += 1;
   // Time calculations for days, hours, minutes and seconds
   // Display the result in the element with id="demo"
   document.getElementById("demo").innerHTML = window.timeVal;
 }, 1000);
+}
+
 </script>
