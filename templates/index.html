@@ -2,9 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Gurdain Angel</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static',filename='vendor/bootstrap.min.css') }}"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Guardian Angel</title>
+    <style>
+      body {
+        background-color: #D3D3D3;
+        }
+    </style>
   </head>
   <body>
+    <div class="container text-center p-5">
+      <img class="img-fluid" src="{{ url_for('static',filename='images/BestTestFinal Transparent.png' )}}">
+    </div>
+    <div class="p-5">
+    </div>
     <div id="my-login-button-target" />
     <script>
        window.snapKitInit = function () {
@@ -12,7 +24,7 @@
         // Mount Login Button
         snap.loginkit.mountButton(loginButtonIconId, {
           clientId: '579c49e5-c75d-4c46-8bde-17e92307b837',
-          redirectURI: 'https://www.google.com',
+          redirectURI: 'https://guardianangels.herokuapp.com/walker',
           scopeList: [
             'user.display_name',
             'user.bitmoji.avatar',
