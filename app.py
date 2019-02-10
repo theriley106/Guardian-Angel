@@ -26,8 +26,7 @@ def select_screen():
 def send_text():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
 	message = """Chris has requested a guardian angel to overlook his walk home.  Check out: https://guardianangels.herokuapp.com/mySite?person=Chris&location=Home"""
-	#18646097067
-	os.system("lib messagebird.sms.create --recipient 18645674106 --body {}".format(message))
+	os.system("lib messagebird.sms.create --recipient 18646097067 --body {}".format(message))
 	return {"status": True}
 
 
