@@ -8,6 +8,16 @@
     height: 50px;
 }
 </style>
+<script>
+function httpGet(theUrl)
+                // The network request grabs the json containing mp3 structure
+                {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+                    xmlHttp.send( null );
+                    return xmlHttp.responseText;
+                }
+                </script>
 
 <div class="card shadow mb-4">
  <div class="card-header py-3">
@@ -17,7 +27,7 @@
 </div>
 <div class="btn-group text-center panel-body">
     <button type="button" style="margin: 5px;border-radius: 10px;height:80px" class="btn btn-block btn-success obuttons" data-toggle="modal" onclick="
-join();start();" data-target="#exampleModal">Start Walk</button>
+httpGet('/sendText');join();start();" data-target="#exampleModal">Start Walk</button>
 </div>
 
 </div>

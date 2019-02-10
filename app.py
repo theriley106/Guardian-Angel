@@ -15,12 +15,20 @@ app = Flask(__name__, static_url_path='/static')
 @app.route('/', methods=['GET'])
 def index():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
-	return render_template('map.html', API_KEY = API_KEY)
+	return render_template('index.html', API_KEY = API_KEY)
 
 @app.route('/walker', methods=['GET'])
 def select_screen():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
 	return render_template('walk.html', API_KEY = API_KEY, AGORA_KEY=AGORA_KEY)
+
+@app.route('/sendText', methods=['GET'])
+def send_text():
+	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
+	message = """Chris has requested a guardian angel to overlook his walk home.  Check out: https://guardianangels.herokuapp.com/mySite?person=Chris&location=Home"""
+	#18646097067
+	os.system("lib messagebird.sms.create --recipient 18645674106 --body {}".format(message))
+	return {"status": True}
 
 
 @app.route('/longLat', methods=['GET'])
