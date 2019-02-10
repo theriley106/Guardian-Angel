@@ -17,7 +17,7 @@ def index():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
 	return render_template('index.html', API_KEY = API_KEY)
 
-@app.route('/select', methods=['GET'])
+@app.route('/walker', methods=['GET'])
 def select_screen():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
 	return render_template('walk.html', API_KEY = API_KEY, AGORA_KEY=AGORA_KEY)
