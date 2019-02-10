@@ -15,7 +15,7 @@ app = Flask(__name__, static_url_path='/static')
 @app.route('/', methods=['GET'])
 def index():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
-	return render_template('index.html', API_KEY = API_KEY)
+	return render_template('map.html', API_KEY = API_KEY)
 
 @app.route('/walker', methods=['GET'])
 def select_screen():
@@ -42,7 +42,7 @@ def get_guardian():
 @app.route('/mySite', methods=['GET'])
 def my_site():
 	#print("Long: {} | Lat: {}".format(longitude, latitude))
-	return render_template("mySite.html")
+	return render_template("mySite.html", API_KEY = API_KEY, AGORA_KEY=AGORA_KEY)
 
 @app.route('/audio', methods=['GET'])
 def get_audio():

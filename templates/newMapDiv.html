@@ -1,0 +1,22 @@
+
+<style>
+#map {
+  height: 200px;
+}
+</style>
+<div class="card shadow mb-4">
+<div class="card-header py-3">
+  <h6 class="m-0 font-weight-bold text-primary">Progress</h6>
+</div>
+<div class="card-body">
+          <h4 class="small font-weight-bold">Walking Time <span class="float-right" id="timeVal">--</span></h4>
+                  <div class="progress mb-2">
+                    <div class="progress-bar bg-danger" id="progress" role="progressbar" width=5% aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+  <div id="map-container">
+      <div id="map"></div>
+  </div>
+</div>
+</div>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}"></script>
+  <script src="{{ url_for('static',filename='app.js') }}"></script>

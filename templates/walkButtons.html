@@ -33,7 +33,10 @@ function start(){
   window.timeVal += 1;
   // Time calculations for days, hours, minutes and seconds
   // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = window.timeVal;
+  document.getElementById("timeVal").innerHTML = window.timeVal + " seconds";
+  var b = document.querySelector("button");
+  document.getElementById("progress").setAttribute("aria-valuenow", window.timeVal);
+  document.getElementById("progress").style.width = window.timeVal + "%";
 }, 1000);
 }
 
