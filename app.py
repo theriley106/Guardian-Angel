@@ -39,6 +39,10 @@ def get_long_lat():
 	latitudeHistory.append(latitude)
 	return jsonify({"status": True})
 
+@app.route('/auth', methods=['GET'])
+def auth():
+	return "Authentication Successful"
+
 @app.route('/guardian', methods=['GET'])
 def get_guardian():
 	#print("Long: {} | Lat: {}".format(longitude, latitude))
