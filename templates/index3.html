@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="{{ url_for('static',filename='vendor/bootstrap.min.css') }}"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static',filename='favicon.ico') }}"/>
+
+    <title>Guardian Angel</title>
+    <style>
+      body {
+        background-color: #D3D3D3;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container text-center p-5">
+      <img class="img-fluid" src="{{ url_for('static',filename='images/BestTestFinal Transparent.png' )}}">
+    </div>
+    <div class="p-5">
+    </div>
+    <div id="my-login-button-target" />
+    <script>
+               window.snapKitInit = function () {
+                var loginButtonIconId = 'my-login-button-target';
+                // Mount Login Button
+                snap.loginkit.mountButton(loginButtonIconId, {
+                  clientId: '973e9c61-0328-4da7-a585-c3f5f3c7ab13',
+                  // redirect uri
+                  redirectURI: 'https://guardianangels.herokuapp.com/auth',
+                  scopeList: [
+                    'user.display_name',
+                    'user.bitmoji.avatar',
+                  ],
+                  handleResponseCallback: function() {
+                    snap.loginkit.fetchUserInfo()
+                      .then(data => console.log('User info:', data));
+                  },
+                });
+              };
+
+              // Load the SDK asynchronously
+              (function (d, s, id) {
+                var js, sjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://sdk.snapkit.com/js/v1/login.js";
+                sjs.parentNode.insertBefore(js, sjs);
+              }(document, 'script', 'loginkit-sdk'));
+            </script>
+  </body>
+</html>

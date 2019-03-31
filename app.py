@@ -22,6 +22,11 @@ def select_screen():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
 	return render_template('walk.html', API_KEY = API_KEY, AGORA_KEY=AGORA_KEY)
 
+@app.route('/gpus', methods=['GET'])
+def gpus():
+	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
+	return render_template('index3.html', API_KEY = API_KEY)
+
 @app.route('/sendText', methods=['GET'])
 def send_text():
 	# return render_template("map.html", API_KEY=API_KEY, AGORA_KEY=AGORA_KEY)
